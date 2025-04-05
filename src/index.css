@@ -1,0 +1,354 @@
+@import '~antd/dist/reset.css';
+
+body {
+    filter: alpha(opacity=1);
+}
+#components-layout-demo-custom-trigger .trigger {
+    padding: 0 24px;
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+    color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+
+
+.margin-10 {
+    margin: 10px;
+}
+
+.ant-progress {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 0.571;
+    list-style: none;
+    font-feature-settings: 'tnum', "tnum";
+    display: inline-block;
+}
+.ant-progress-bg{
+    border-radius: 0;
+}
+.ant-progress-inner {
+    border-radius: 0;
+}
+
+.rhap_container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    font-family: inherit;
+    width: 100%;
+    padding: 5px 10px;
+    background-color: #fff;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+}
+.rhap_play-pause-button {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+}
+
+.rhap_container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    font-family: inherit;
+    width: 100%;
+    padding: 5px 15px;
+    background-color: #fff;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+}
+.rhap_container:focus:not(:focus-visible) {
+    outline: 0;
+}
+.rhap_container svg {
+    vertical-align: initial;
+}
+
+.rhap_header {
+    margin-bottom: 10px;
+}
+
+.rhap_footer {
+    margin-top: 5px;
+}
+
+.rhap_main {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+
+.rhap_stacked .rhap_controls-section {
+    margin-top: 8px;
+}
+
+.rhap_horizontal {
+    flex-direction: row;
+}
+.rhap_horizontal .rhap_controls-section {
+    margin-left: 8px;
+}
+
+.rhap_horizontal-reverse {
+    flex-direction: row-reverse;
+}
+.rhap_horizontal-reverse .rhap_controls-section {
+    margin-right: 8px;
+}
+
+.rhap_stacked-reverse {
+    flex-direction: column-reverse;
+}
+.rhap_stacked-reverse .rhap_controls-section {
+    margin-bottom: 8px;
+}
+
+.rhap_progress-section {
+    display: flex;
+    flex: 3 1 auto;
+    align-items: center;
+}
+
+.rhap_progress-container {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    flex: 1 0 auto;
+    align-self: center;
+    margin: 0 calc(10px + 1%);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.rhap_progress-container:focus:not(:focus-visible) {
+    outline: 0;
+}
+
+.rhap_time {
+    color: #333;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.rhap_progress-bar {
+    box-sizing: border-box;
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    height: 5px;
+    background-color: #dddddd;
+    border-radius: 2px;
+}
+
+.rhap_progress-filled {
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    background-color: #868686;
+    border-radius: 2px;
+}
+
+.rhap_progress-bar-show-download {
+    background-color: rgba(221, 221, 221, 0.5);
+}
+
+.rhap_download-progress {
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    background-color: #dddddd;
+    border-radius: 2px;
+}
+
+.rhap_progress-indicator {
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 3;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    top: -8px;
+    background: #868686;
+    border-radius: 50px;
+    box-shadow: rgba(134, 134, 134, 0.5) 0 0 5px;
+}
+
+.rhap_controls-section {
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rhap_additional-controls {
+    display: flex;
+    flex: 1 0 auto;
+    align-items: center;
+}
+
+.rhap_repeat-button {
+    font-size: 20px;
+    width: 26px;
+    height: 20px;
+    color: #868686;
+    margin-right: 0px;
+}
+
+.rhap_main-controls {
+    flex: 0 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rhap_main-controls-button {
+    margin: 0 3px;
+    color: #868686;
+    font-size: 25px;
+    width: 25px;
+    height: 25px;
+}
+
+
+.rhap_volume-controls {
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.rhap_volume-button {
+    flex: 0 0 26px;
+    font-size: 26px;
+    width: 20px;
+    height: 26px;
+    color: #868686;
+    margin-right: 6px;
+}
+
+.rhap_volume-container {
+    display: flex;
+    align-items: center;
+    flex: 0 1 100px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.rhap_volume-bar-area {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 14px;
+    cursor: pointer;
+}
+.rhap_volume-bar-area:focus:not(:focus-visible) {
+    outline: 0;
+}
+
+.rhap_volume-bar {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background: #dddddd;
+    border-radius: 2px;
+}
+
+.rhap_volume-indicator {
+    box-sizing: border-box;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    margin-left: -6px;
+    left: 0;
+    top: -4px;
+    background: #868686;
+    opacity: 0.9;
+    border-radius: 50px;
+    box-shadow: rgba(134, 134, 134, 0.5) 0 0 3px;
+    cursor: pointer;
+}
+.rhap_volume-indicator:hover {
+    opacity: 0.9;
+}
+
+.rhap_volume-filled {
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    background-color: #868686;
+    border-radius: 2px;
+}
+
+/* Utils */
+.rhap_button-clear {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+.rhap_button-clear:hover {
+    opacity: 0.9;
+    transition-duration: 0.2s;
+}
+.rhap_button-clear:active {
+    opacity: 0.95;
+}
+.rhap_button-clear:focus:not(:focus-visible) {
+    outline: 0;
+}
+
+.ant-popover-content{
+    min-width: 400px;
+}
+
+#components-form-demo-normal-login .login-form {
+    max-width: 300px;
+}
+#components-form-demo-normal-login .login-form-forgot {
+    float: right;
+}
+#components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+    float: left;
+}
+#components-form-demo-normal-login .login-form-button {
+    width: 100%;
+}
+
+.ant-layout {
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+    min-height: 0;
+    background: rgba(0, 0, 0, 0);
+}
+.site-layout .site-layout-background {
+    background: rgba(0, 0, 0, 0);
+}
+
+:where(.css-dev-only-do-not-override-mxhywb).ant-menu .ant-menu-item, :where(.css-dev-only-do-not-override-mxhywb).ant-menu .ant-menu-submenu, :where(.css-dev-only-do-not-override-mxhywb).ant-menu .ant-menu-submenu-title {
+    border-radius: 4px;
+}
+
+:where(.css-dev-only-do-not-override-mxhywb).ant-btn {
+    border-radius: 4px;
+}
