@@ -1,5 +1,5 @@
 import React, {FC, useState, useEffect} from 'react';
-import {Card, Flex, Layout, Tree, Watermark} from 'antd';
+import {Card, Drawer, Flex, Layout, Tree, Watermark} from 'antd';
 import type {GetProps} from 'antd';
 import {Splitter} from 'antd';
 import {useNavigate, useLocation, useSearchParams} from 'react-router-dom';
@@ -33,8 +33,34 @@ const treeData: TreeNode[] = [
             {title: 'leaf 1-1', key: 'ChildrenComp4', isLeaf: true},
         ],
     },
-
 ];
+
+interface WindowSize {
+    width: number;
+    height: number;
+}
+
+function useWindowSize(): WindowSize {
+    const [windowSize, setWindowSize] = useState<WindowSize>({
+        width: window.innerWidth,
+        height: window.innerHeight,
+    });
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return windowSize;
+}
 
 const findAllParentKeys = (treeData: any[], key: string, path: string[] = []): string[] => {
     for (const node of treeData) {
@@ -71,10 +97,11 @@ const loadComponent = async (key: string) => {
         const module = await import(`./sheets_paper/${key}`);
         return module.default;
     } catch (error) {
-        console.error(`Компонент  ${key} не найден`, error);
+        console.error(`Компонент ${key} не найден`, error);
         return null;
     }
 };
+
 const {useToken} = theme;
 
 const FAQTreePage: FC = () => {
@@ -85,6 +112,10 @@ const FAQTreePage: FC = () => {
     const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
     const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
     const [components, setComponents] = useState<{ key: string; component: React.ComponentType }[]>([]);
+    const windowSize = useWindowSize();
+    const isMobile = windowSize.width < 768;
+    const cardWidth = isMobile ? '99%' : '80%';
+    const [panelSize, setPanelSize] = useState<string | number>(isMobile ? 0 : 300);
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
@@ -97,11 +128,15 @@ const FAQTreePage: FC = () => {
     }, []);
 
     useEffect(() => {
+        setPanelSize(isMobile ? 0 : 300);
+    }, [isMobile]);
+
+    useEffect(() => {
         const pageKey = searchParams.get('page') || 'main';
         if (pageKey) {
             loadComponents(pageKey);
         }
-    }, [location]);
+    }, [location, searchParams]);
 
     const loadComponents = async (key: string) => {
         const parentNode = findParentNode(treeData, key);
@@ -137,13 +172,56 @@ const FAQTreePage: FC = () => {
         setExpandedKeys(keys.map(key => key.toString()));
     };
 
+    const handleResize = (sizes: (number | string)[]) => {
+        if (!isMobile) {
+            setPanelSize(sizes[0]);
+        } else {
+            setOpen(true);
+        }
+    };
+    const [open, setOpen] = useState(false);
+    const onClose = () => {
+        setOpen(false);
+    };
     return (
         <Layout>
-            <Splitter>
-                <Splitter.Panel collapsible={true}
-                                defaultSize="15%" min="10%" max="40%"
-                                style={{minHeight: '100vh', backgroundColor: token.colorBgContainer}}
+            <Splitter onResize={handleResize}>
+                <Splitter.Panel
+                    resizable={!isMobile}
+                    collapsible={true}
+                    size={panelSize}
+                    max={isMobile ? 0 : 300}
+                    style={{
+                        minHeight: '100vh',
+                        backgroundColor: token.colorBgContainer,
+                        display: isMobile && panelSize === 0 ? 'none' : 'block'
+                    }}
                 >
+                    <Drawer placement={'left'} onClose={onClose} open={open}
+                            closable={false}
+                            styles={{
+                                header: { display: 'none' },
+                                body: { padding: 0 }
+                            }}
+                    >
+                        <Watermark
+                            style={{backgroundColor: token.colorBgContainer}}
+                            height={30}
+                            width={100}
+                            image="https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*lkAoRbywo0oAAAAAAAAAAAAADrJ8AQ/original"
+                        >
+                            <DirectoryTree
+                                multiple
+                                style={{minHeight: '100vh'}}
+                                onSelect={onSelect}
+                                onExpand={onExpand}
+                                treeData={treeData}
+                                selectedKeys={selectedKeys}
+                                expandedKeys={expandedKeys}
+                            />
+                        </Watermark>
+                    </Drawer>
+
                     <Watermark
                         style={{backgroundColor: token.colorBgContainer}}
                         height={30}
@@ -163,7 +241,6 @@ const FAQTreePage: FC = () => {
                 </Splitter.Panel>
                 <Splitter.Panel style={{
                     backgroundColor: token.colorBgContainer,
-                    // backgroundImage: 'url(/bg_1.png)',
                     backgroundRepeat: 'repeat',
                     backgroundSize: 'auto'
                 }}>
@@ -171,11 +248,12 @@ const FAQTreePage: FC = () => {
                           style={{
                               overflowY: 'auto',
                               maxHeight: '100vh',
+                              height: '100vh',
                           }}
                     >
                         {components.map(({key, component: Component}, index) => (
-                            <Flex justify={"center"} align={"flex-start"} key={'ddd' + key}>
-                                <Card style={{width: '80%'}}>
+                            <Flex justify={"center"} align={"flex-start"} key={'flex' + key}>
+                                <Card style={{width: cardWidth}}>
                                     <Component key={key}/>
                                 </Card>
                             </Flex>
